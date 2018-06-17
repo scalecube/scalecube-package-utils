@@ -1,5 +1,7 @@
 package io.scalecube.app.decoration;
 
+import io.scalecube.app.packages.PackageInfo;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +20,17 @@ public class Logo {
     }
   }
 
+  public static Builder from(PackageInfo packageInfo) {
+    return new Builder().tagVersion(packageInfo.version())
+    .group(packageInfo.groupId())
+    .artifact(packageInfo.artifactId())
+    .javaVersion(PackageInfo.java())
+    .osType(PackageInfo.os())
+    .pid(PackageInfo.pid())
+    .hostname(PackageInfo.hostname())
+    .website();
+  }
+  
   public static class Builder {
     private int index = 0;
     private int startAt = 5;

@@ -14,4 +14,8 @@ Logo.builder().tagVersion(packageInfo.version())
         .hostname(packageInfo.hostname())
         .website().draw();
         
-```
+`
+Logo.from(packageInfo)
+        .port(String.valueOf(seed.cluster().address().port()))
+        .ip(seed.cluster().address().host())
+        .draw();
