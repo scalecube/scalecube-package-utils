@@ -20,39 +20,67 @@ public class Logo {
     }
   }
 
+  /**
+   * Configure the site to be displayed in the logo.
+   * @return this builder
+   */
   public static Builder from(PackageInfo packageInfo) {
     return new Builder().tagVersion(packageInfo.version())
-    .group(packageInfo.groupId())
-    .artifact(packageInfo.artifactId())
-    .javaVersion(PackageInfo.java())
-    .osType(PackageInfo.os())
-    .pid(PackageInfo.pid())
-    .hostname(PackageInfo.hostname())
-    .website();
+        .group(packageInfo.groupId())
+        .artifact(packageInfo.artifactId())
+        .javaVersion(PackageInfo.java())
+        .osType(PackageInfo.os())
+        .pid(PackageInfo.pid())
+        .hostname(PackageInfo.hostname())
+        .website();
   }
-  
+
   public static class Builder {
     private int index = 0;
     private int startAt = 5;
     private Map<Integer, LogoHeader> headers = new HashMap<>();
 
+    /**
+     * Configure the ip to be displayed in the logo.
+     * 
+     * @return this builder
+     */
     public Builder ip(String value) {
-      headers.put(startAt + headers.size() + 1, new LogoHeader("IP Address: #1".replaceAll("#1", value)));
+      headers.put(startAt + headers.size() + 1,
+          new LogoHeader("IP Address: #1".replaceAll("#1", value)));
       return this;
     }
 
+    /**
+     * Configure the tag version to be displayed in the logo.
+     * 
+     * @return this builder
+     */
     public Builder tagVersion(String value) {
-      headers.put(startAt + headers.size() + 1, new LogoHeader("ScaleCube #1 is Running.".replaceAll("#1", value)));
+      headers.put(startAt + headers.size() + 1,
+          new LogoHeader("ScaleCube #1 is Running.".replaceAll("#1", value)));
       return this;
     }
 
+    /**
+     * Configure the group to be displayed in the logo.
+     * 
+     * @return this builder
+     */
     public Builder group(String value) {
-      headers.put(startAt + headers.size() + 1, new LogoHeader("Group: #1".replaceAll("#1", value)));
+      headers.put(startAt + headers.size() + 1,
+          new LogoHeader("Group: #1".replaceAll("#1", value)));
       return this;
     }
 
+    /**
+     * Configure the artifact to be displayed in the logo.
+     * 
+     * @return this builder
+     */
     public Builder artifact(String value) {
-      headers.put(startAt + headers.size() + 1, new LogoHeader("Artifact: #1".replaceAll("#1", value)));
+      headers.put(startAt + headers.size() + 1,
+          new LogoHeader("Artifact: #1".replaceAll("#1", value)));
       return this;
     }
 
@@ -81,11 +109,22 @@ public class Logo {
       return this;
     }
 
+    /**
+     * Configure the host name to be displayed in the logo.
+     * 
+     * @return this builder
+     */
     public Builder hostname(String value) {
-      headers.put(startAt + headers.size() + 1, new LogoHeader("Host Name: #1".replaceAll("#1", value)));
+      headers.put(startAt + headers.size() + 1,
+          new LogoHeader("Host Name: #1".replaceAll("#1", value)));
       return this;
     }
 
+    /**
+     * Configure the site to be displayed in the logo.
+     * 
+     * @return this builder
+     */
     public Builder website() {
       headers.put(startAt + headers.size() + 2, new LogoHeader("http://scalecube.io"));
       headers.put(startAt + headers.size() + 2, new LogoHeader("https://github.com/scalecube"));

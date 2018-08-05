@@ -29,8 +29,10 @@ public class PackageInfo {
       try {
         FileInputStream in = new FileInputStream(path + "package.properties");
         properties.load(in);
-      } catch (IOException e) {
-        System.out.println("cannot open file: " + path + "package.properties cause:" + e.getCause());
+      } catch (IOException exception) {
+        System.out
+            .println(
+                "cannot open file: " + path + "package.properties cause:" + exception.getCause());
         defaultProps();
       }
     } else {
@@ -38,7 +40,7 @@ public class PackageInfo {
       if (stream != null) {
         try {
           properties.load(stream);
-        } catch (IOException e) {
+        } catch (IOException ioException) {
           defaultProps();
         }
       } else {
@@ -100,6 +102,11 @@ public class PackageInfo {
     return hostname;
   }
 
+  /**
+   * Process id of the jvm.
+   * 
+   * @return the pid.
+   */
   public static String pid() {
     String vmName = ManagementFactory.getRuntimeMXBean().getName();
     int pids = vmName.indexOf("@");
@@ -125,9 +132,10 @@ public class PackageInfo {
     String list = getVariable("SC_SEED_ADDRESS", null);
     if (list != null && !list.isEmpty()) {
       String[] hosts = list.split(",");
-      List<String> seedList = Arrays.asList(hosts).stream().filter(predicate -> !predicate.isEmpty())
-          .map(mapper -> mapper.trim())
-          .collect(Collectors.toList());
+      List<String> seedList =
+          Arrays.asList(hosts).stream().filter(predicate -> !predicate.isEmpty())
+              .map(mapper -> mapper.trim())
+              .collect(Collectors.toList());
       return seedList.toArray(new String[seedList.size()]);
     } else {
       return null;

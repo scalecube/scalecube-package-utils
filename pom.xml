@@ -1,75 +1,20 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>io.scalecube</groupId>
-	<artifactId>scalecube-app-utils</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>ScaleCube Application Utils</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.scalecube</groupId>
+  <artifactId>scalecube-app-utils</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>ScaleCube Application Utils</name>
 
-<description>
-    ScaleCube is a lightweight decentralized cluster membership, failure detection, messaging and
-    gossip protocol library for the Java VM.
-  </description>
-  <inceptionYear>2015</inceptionYear>
-  <url>http://scalecube.io</url>
-
-  <licenses>
-    <license>
-      <name>The Apache License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-    </license>
-  </licenses>
-
-  <prerequisites>
-    <maven>3.0.3</maven>
-  </prerequisites>
-
+  <parent>
+    <groupId>io.scalecube</groupId>
+    <artifactId>scalecube-parent-pom</artifactId>
+    <version>0.0.9</version>
+  </parent>
   <scm>
     <url>https://github.com/scalecube/scalecube-app-utils</url>
     <connection>scm:git:git@github.com:scalecube/scalecube-app-utils.git</connection>
     <developerConnection>scm:git:git@github.com:scalecube/scalecube-app-utils.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
-
-  <developers>
-    <developer>
-      <id>scalecube.io</id>
-      <name>The ScaleCube Project Contributors</name>
-      <email>info@scalecube.io</email>
-      <organization>The ScaleCube Project</organization>
-      <organizationUrl>http://scalecube.io/</organizationUrl>
-    </developer>
-  </developers>
-
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-  </distributionManagement>
-
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.7.0</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<optimize>true</optimize>
-					<compilerArgs>
-						<arg>-proc:none</arg>
-						<arg>-Xlint:unchecked</arg>
-					</compilerArgs>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>
