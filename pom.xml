@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.scalecube</groupId>
   <artifactId>scalecube-app-utils</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.2</version>
   <name>ScaleCube Application Utils</name>
 
   <parent>
@@ -14,7 +14,7 @@
     <url>https://github.com/scalecube/scalecube-app-utils</url>
     <connection>scm:git:git@github.com:scalecube/scalecube-app-utils.git</connection>
     <developerConnection>scm:git:git@github.com:scalecube/scalecube-app-utils.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>v0.0.2</tag>
   </scm>
   <dependencies>
     <dependency>
