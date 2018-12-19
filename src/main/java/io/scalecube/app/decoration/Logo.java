@@ -1,11 +1,9 @@
 package io.scalecube.app.decoration;
 
 import io.scalecube.app.packages.PackageInfo;
-
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -184,11 +182,16 @@ public class Logo {
 
     /** draw the scalecube logo. */
     public void draw() {
-      try {
-        Files.lines(
-                Paths.get(Logo.class.getClassLoader().getResource(this.logoResourceName).toURI()))
-            .forEach(this::pln);
-      } catch (IOException | URISyntaxException ignoredException) {
+
+      try (BufferedReader reader =
+          new BufferedReader(
+              new InputStreamReader(
+                  ClassLoader
+                  .getSystemClassLoader()
+                  .getResourceAsStream(logoResourceName)))) {
+
+        reader.lines().forEach(this::pln);
+      } catch (IOException ignoredException) {
         for (int i = 0; i < startAt + headers.size(); i++) {
           pln("");
         }
