@@ -54,7 +54,6 @@ public class PackageInfo {
     properties.put("version", "Development");
     properties.put("groupId", "Development");
     properties.put("version", "Development");
-    properties.put("version", "Development");
   }
 
   public String version() {
@@ -142,6 +141,14 @@ public class PackageInfo {
     }
   }
 
+  /**
+   * Returns docker tag.
+   */
+  public static String dockerTag() {
+    String tag = getVariable("DOCKER_TAG", "");
+    return tag;
+  }
+  
   private static String getVariable(String name, String defaultValue) {
     if (System.getenv(name) != null) {
       return System.getenv(name);
