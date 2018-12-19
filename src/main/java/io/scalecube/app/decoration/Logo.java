@@ -46,7 +46,7 @@ public class Logo {
     private int index = 0;
     private int startAt = 5;
     private Map<Integer, LogoHeader> headers = new HashMap<>();
-    private String logoResourceName = "logo";
+    private String logoResourceName = "io/scalecube/app/logo";
 
     /**
      * Configure the logo ascii art resource name.

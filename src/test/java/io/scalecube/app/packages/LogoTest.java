@@ -28,6 +28,6 @@ public class LogoTest {
   
   @Test
   void verifyLogo2() throws Exception {
-    Logo.from(packageInfo).dockerTag("Logo2").logoResource("logo2").draw();
+    Logo.from(packageInfo).dockerTag("Logo2").logoResource("io/scalecube/app/logo2").draw();
   }
 }
