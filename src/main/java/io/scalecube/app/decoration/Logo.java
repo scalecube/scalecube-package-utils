@@ -1,7 +1,9 @@
 package io.scalecube.app.decoration;
 
 import io.scalecube.app.packages.PackageInfo;
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,16 +24,19 @@ public class Logo {
 
   /**
    * Configure the site to be displayed in the logo.
+   *
    * @return this builder
    */
   public static Builder from(PackageInfo packageInfo) {
-    return new Builder().tagVersion(packageInfo.version())
+    return new Builder()
+        .tagVersion(packageInfo.version())
         .group(packageInfo.groupId())
         .artifact(packageInfo.artifactId())
         .javaVersion(PackageInfo.java())
         .osType(PackageInfo.os())
         .pid(PackageInfo.pid())
         .hostname(PackageInfo.hostname())
+        .dockerTag(PackageInfo.dockerTag())
         .website();
   }
 
@@ -39,48 +44,66 @@ public class Logo {
     private int index = 0;
     private int startAt = 5;
     private Map<Integer, LogoHeader> headers = new HashMap<>();
+    private String logoResourceName = "io/scalecube/app/logo";
+
+    /**
+     * Configure the logo ascii art resource name.
+     *
+     * @param value the resource name
+     * @return this builder
+     */
+    public Builder logoResource(String value) {
+      try {
+        Logo.class.getClassLoader().getResource(value);
+        this.logoResourceName = value;
+      } catch (Exception ignoredException) {
+        // TODO: handle exception
+      }
+      return this;
+    }
 
     /**
      * Configure the ip to be displayed in the logo.
-     * 
+     *
      * @return this builder
      */
     public Builder ip(String value) {
-      headers.put(startAt + headers.size() + 1,
-          new LogoHeader("IP Address: #1".replaceAll("#1", value)));
+      headers.put(
+          startAt + headers.size() + 1, new LogoHeader("IP Address: #1".replaceAll("#1", value)));
       return this;
     }
 
     /**
      * Configure the tag version to be displayed in the logo.
-     * 
+     *
      * @return this builder
      */
     public Builder tagVersion(String value) {
-      headers.put(startAt + headers.size() + 1,
+      headers.put(
+          startAt + headers.size() + 1,
           new LogoHeader("ScaleCube #1 is Running.".replaceAll("#1", value)));
       return this;
     }
 
     /**
      * Configure the group to be displayed in the logo.
-     * 
+     *
      * @return this builder
      */
     public Builder group(String value) {
-      headers.put(startAt + headers.size() + 1,
-          new LogoHeader("Group: #1".replaceAll("#1", value)));
+      headers.put(
+          startAt + headers.size() + 1, new LogoHeader("Group: #1".replaceAll("#1", value)));
       return this;
     }
 
     /**
      * Configure the artifact to be displayed in the logo.
-     * 
+     *
      * @return this builder
      */
     public Builder artifact(String value) {
-      headers.put(startAt + headers.size() + 1,
-          new LogoHeader("Artifact: #1".replaceAll("#1", value)));
+      headers.put(
+          startAt + headers.size() + 1, new LogoHeader("Artifact: #1".replaceAll("#1", value)));
       return this;
     }
 
@@ -111,18 +134,44 @@ public class Logo {
 
     /**
      * Configure the host name to be displayed in the logo.
-     * 
+     *
      * @return this builder
      */
     public Builder hostname(String value) {
-      headers.put(startAt + headers.size() + 1,
-          new LogoHeader("Host Name: #1".replaceAll("#1", value)));
+      headers.put(
+          startAt + headers.size() + 1, new LogoHeader("Host Name: #1".replaceAll("#1", value)));
+      return this;
+    }
+
+    /**
+     * Configure the docker image tag to be displayed in the logo.
+     *
+     * @return this builder
+     */
+    public Builder dockerTag(String value) {
+      if (value != null && !value.isEmpty()) {
+        headers.put(
+            startAt + headers.size() + 1, new LogoHeader("Docker Tag: #1".replaceAll("#1", value)));
+      }
+      return this;
+    }
+
+    /**
+     * Configure a commit id to be displayed in the logo.
+     *
+     * @return this builder
+     */
+    public Builder commitId(String value) {
+      if (value != null && !value.isEmpty()) {
+        headers.put(
+            startAt + headers.size() + 1, new LogoHeader("commit id: #1".replaceAll("#1", value)));
+      }
       return this;
     }
 
     /**
      * Configure the site to be displayed in the logo.
-     * 
+     *
      * @return this builder
      */
     public Builder website() {
@@ -131,40 +180,22 @@ public class Logo {
       return this;
     }
 
-
-
-    /**
-     * draw the scalecube logo.
-     */
+    /** draw the scalecube logo. */
     public void draw() {
-      pln("                         .,,,,,,                          ");
-      pln("                       .,,,,,,,,,,,,/                     ");
-      pln("                  .,,,,,,,,,,,,,,,,,,,.                   ");
-      pln("               .,,,,,,,,,,,,,,,,,,,,,,,,,,,.              ");
-      pln("            .,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.           ");
-      pln("         ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,        ");
-      pln("     ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,     ");
-      pln("     *  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,*       ");
-      pln("     ***** /,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,/  ....    ");
-      pln("     ******** /*,,,,,,,,,,,,,,,,,,,,,,,,,,,,/  .......    ");
-      pln("     ***********, /,,,,,,,,,,,,,,,,,,,,,*  ...........    ");
-      pln("     ***************. *,,,,,,,,,,,,,*/ ...............    ");
-      pln("     ******************, /*,,,,,,/  ..................    ");
-      pln("     ********************** /*/  .....................    ");
-      pln("     ************************ ........................    ");
-      pln("     ************************ ........................    ");
-      pln("     ************************ ........................    ");
-      pln("     ************************ ........................    ");
-      pln("     ************************ ........................    ");
-      pln("     ************************ ........................    ");
-      pln("     ************************ ........................    ");
-      pln("     ************************ ........................    ");
-      pln("         ******************** ....................        ");
-      pln("            ***************** .................           ");
-      pln("                ************* .............               ");
-      pln("                   ********** ..........                  ");
-      pln("                       ****** ......                      ");
-      pln("                          *** ...                         ");
+
+      try (BufferedReader reader =
+          new BufferedReader(
+              new InputStreamReader(
+                  ClassLoader
+                  .getSystemClassLoader()
+                  .getResourceAsStream(logoResourceName)))) {
+
+        reader.lines().forEach(this::pln);
+      } catch (IOException ignoredException) {
+        for (int i = 0; i < startAt + headers.size(); i++) {
+          pln("");
+        }
+      }
     }
 
     private void pln(String line) {
@@ -176,12 +207,9 @@ public class Logo {
       }
       index++;
     }
-
-
   }
 
   public static Builder builder() {
     return new Builder();
   }
 }
-
