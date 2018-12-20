@@ -36,7 +36,7 @@ public class PackageInfo {
         defaultProps();
       }
     } else {
-      InputStream stream = PackageInfo.class.getResourceAsStream("package.properties");
+      InputStream stream = PackageInfo.class.getResourceAsStream("/package.properties");
       if (stream != null) {
         try {
           properties.load(stream);
@@ -53,7 +53,6 @@ public class PackageInfo {
     properties.put("artifactId", "Development");
     properties.put("version", "Development");
     properties.put("groupId", "Development");
-    properties.put("version", "Development");
   }
 
   public String version() {
@@ -68,6 +67,10 @@ public class PackageInfo {
     return properties.getProperty("artifactId");
   }
 
+  public String name() {
+    return properties.getProperty("name", artifactId());
+  }
+  
   public static String java() {
     return System.getProperty("java.version");
   }

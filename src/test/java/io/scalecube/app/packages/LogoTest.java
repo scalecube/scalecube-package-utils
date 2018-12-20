@@ -11,7 +11,7 @@ public class LogoTest {
   void verifyPackageInfo() throws Exception {
     
     Logo.builder()
-        .tagVersion(packageInfo.version())
+        .tagVersion(packageInfo.name() + " " + packageInfo.version())
         .port("12345")
         .ip("192.168.100.101")
         .group(packageInfo.groupId())
@@ -28,6 +28,10 @@ public class LogoTest {
   
   @Test
   void verifyLogo2() throws Exception {
-    Logo.from(packageInfo).dockerTag("Logo2").logoResource("io/scalecube/app/logo2").draw();
+    Logo
+      .from(packageInfo)
+      .dockerTag("Logo2")
+      .logoResource("io/scalecube/app/logo2")
+      .draw();
   }
 }
