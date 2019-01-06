@@ -1,5 +1,6 @@
 package io.scalecube.app.packages;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,35 +12,30 @@ import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-/**
- * Information provider about the environment and the package of this instance.
- *
- */
+/** Information provider about the environment and the package of this instance. */
 public class PackageInfo {
 
   private final Properties properties = new Properties();
 
-  /**
-   * Runtime Environment information provider.
-   */
+  /** Runtime Environment information provider. */
   public PackageInfo() {
     if (System.getenv("SC_HOME") != null) {
       String path = System.getenv("SC_HOME");
 
       try {
-        FileInputStream in = new FileInputStream(path + "package.properties");
+        FileInputStream in = new FileInputStream(new File(path, "package.properties"));
         properties.load(in);
       } catch (IOException exception) {
-        System.out
-            .println(
-                "cannot open file: " + path + "package.properties cause:" + exception.getCause());
+        System.out.println(
+            "cannot open file: " + path + "package.properties cause:" + exception.getCause());
         defaultProps();
       }
     } else {
-      InputStream stream = PackageInfo.class.getResourceAsStream("/package.properties");
+      InputStream stream = ClassLoader.getSystemResourceAsStream("package.properties");
       if (stream != null) {
         try {
           properties.load(stream);
+          stream.close();
         } catch (IOException ioException) {
           defaultProps();
         }
@@ -70,7 +66,7 @@ public class PackageInfo {
   public String name() {
     return properties.getProperty("name", artifactId());
   }
-  
+
   public static String java() {
     return System.getProperty("java.version");
   }
@@ -81,7 +77,7 @@ public class PackageInfo {
 
   /**
    * returns host name of the current running host.
-   * 
+   *
    * @return host name.
    */
   public static String hostname() {
@@ -106,7 +102,7 @@ public class PackageInfo {
 
   /**
    * Process id of the jvm.
-   * 
+   *
    * @return the pid.
    */
   public static String pid() {
@@ -116,10 +112,7 @@ public class PackageInfo {
     return pid;
   }
 
-
-  /**
-   * Returns API Gateway API.
-   */
+  /** Returns API Gateway API. */
   public static int gatewayPort() {
     String port = getVariable("API_GATEWAY_PORT", "8081");
     return Integer.valueOf(port);
@@ -127,7 +120,7 @@ public class PackageInfo {
 
   /**
    * Resolve seed address from environment variable or system property.
-   * 
+   *
    * @return seed address as string for example localhost:4801.
    */
   public static String[] seedAddress() {
@@ -135,7 +128,9 @@ public class PackageInfo {
     if (list != null && !list.isEmpty()) {
       String[] hosts = list.split(",");
       List<String> seedList =
-          Arrays.asList(hosts).stream().filter(predicate -> !predicate.isEmpty())
+          Arrays.asList(hosts)
+              .stream()
+              .filter(predicate -> !predicate.isEmpty())
               .map(mapper -> mapper.trim())
               .collect(Collectors.toList());
       return seedList.toArray(new String[seedList.size()]);
@@ -144,14 +139,12 @@ public class PackageInfo {
     }
   }
 
-  /**
-   * Returns docker tag.
-   */
+  /** Returns docker tag. */
   public static String dockerTag() {
     String tag = getVariable("DOCKER_TAG", "");
     return tag;
   }
-  
+
   private static String getVariable(String name, String defaultValue) {
     if (System.getenv(name) != null) {
       return System.getenv(name);
@@ -161,5 +154,4 @@ public class PackageInfo {
     }
     return defaultValue;
   }
-
 }
