@@ -29,7 +29,7 @@ public class Logo {
    */
   public static Builder from(PackageInfo packageInfo) {
     return new Builder()
-        .tagVersion(packageInfo.version())
+        .tagVersion(packageInfo.name() + " " + packageInfo.version())
         .group(packageInfo.groupId())
         .artifact(packageInfo.artifactId())
         .javaVersion(PackageInfo.java())
@@ -54,10 +54,10 @@ public class Logo {
      */
     public Builder logoResource(String value) {
       try {
-        Logo.class.getClassLoader().getResource(value);
+        ClassLoader.getSystemClassLoader().getResourceAsStream(value).close();
         this.logoResourceName = value;
       } catch (Exception ignoredException) {
-        // TODO: handle exception
+        //fallback to default logo
       }
       return this;
     }
@@ -80,8 +80,7 @@ public class Logo {
      */
     public Builder tagVersion(String value) {
       headers.put(
-          startAt + headers.size() + 1,
-          new LogoHeader("ScaleCube #1 is Running.".replaceAll("#1", value)));
+          startAt + headers.size() + 1, new LogoHeader("#1 is Running.".replaceAll("#1", value)));
       return this;
     }
 
@@ -186,9 +185,7 @@ public class Logo {
       try (BufferedReader reader =
           new BufferedReader(
               new InputStreamReader(
-                  ClassLoader
-                  .getSystemClassLoader()
-                  .getResourceAsStream(logoResourceName)))) {
+                  ClassLoader.getSystemClassLoader().getResourceAsStream(logoResourceName)))) {
 
         reader.lines().forEach(this::pln);
       } catch (IOException ignoredException) {
