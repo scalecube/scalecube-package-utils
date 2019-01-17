@@ -1,20 +1,27 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>scalecube-app-utils</artifactId>
-  <version>0.0.5-SNAPSHOT</version>
-  <name>ScaleCube Application Utils</name>
 
   <parent>
     <groupId>io.scalecube</groupId>
     <artifactId>scalecube-parent-pom</artifactId>
-    <version>0.0.16</version>
+    <version>0.0.17</version>
   </parent>
+
+  <artifactId>scalecube-package-utils</artifactId>
+  <version>0.0.5-SNAPSHOT</version>
+
+  <name>ScaleCube Package Utils</name>
+
   <scm>
-    <url>https://github.com/scalecube/scalecube-app-utils</url>
-    <connection>scm:git:git@github.com:scalecube/scalecube-app-utils.git</connection>
-    <developerConnection>scm:git:git@github.com:scalecube/scalecube-app-utils.git</developerConnection>
+    <url>https://github.com/scalecube/scalecube-package-utils</url>
+    <connection>scm:git:git@github.com:scalecube/scalecube-package-utils.git</connection>
+    <developerConnection>scm:git:git@github.com:scalecube/scalecube-package-utils.git
+    </developerConnection>
     <tag>HEAD</tag>
   </scm>
+
   <dependencies>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -22,6 +29,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
   <build>
     <testResources>
       <testResource>
