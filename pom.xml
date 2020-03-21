@@ -5,7 +5,7 @@
   <parent>
     <groupId>io.scalecube</groupId>
     <artifactId>scalecube-parent-pom</artifactId>
-    <version>0.0.17</version>
+    <version>0.1.0-RC1</version>
   </parent>
 
   <artifactId>scalecube-app-utils</artifactId>
@@ -21,10 +21,42 @@
     <tag>HEAD</tag>
   </scm>
 
+  <properties>
+    <junit.version>5.1.1</junit.version>
+    <mockito.version>2.24.5</mockito.version>
+    <hamcrest.version>1.3</hamcrest.version>
+  </properties>
+
   <dependencies>
+    <!-- Test scope -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <version>${mockito.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-all</artifactId>
+      <version>${hamcrest.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-core</artifactId>
+      <version>${hamcrest.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -47,4 +79,5 @@
       </testResource>
     </testResources>
   </build>
+
 </project>
