@@ -4,7 +4,8 @@ on:
   push:
     paths-ignore:
       - '.github/workflows/**'
-      - 'README.md'
+      - '*.md'
+      - '*.txt'
     branches-ignore:
       - 'release*'
 
