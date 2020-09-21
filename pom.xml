@@ -89,6 +89,13 @@
           <include>package.properties</include>
         </includes>
       </testResource>
+      <testResource>
+        <filtering>false</filtering>
+        <directory>src/test/resources</directory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </testResource>
     </testResources>
   </build>
 
